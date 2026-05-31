@@ -2,87 +2,123 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization; 
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace PokemonAsyncDemo;
-
-class Program
+namespace PokemonAsyncDemo
 {
-    private static readonly HttpClient Client = new();
-
-    static async Task Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Fetching Pokémon data asynchronously...\n");
+        static HttpClient client = new HttpClient();
 
-        try
-        {  // Fetch the list of Pokémon from the API
-            const string apiUrl = "https://pokeapi.co/api/v2/pokemon";
-            var response = await Client.GetFromJsonAsync<PokemonResponse>(apiUrl);
+        static async Task Main(string[] args)
+        {
+            Console.WriteLine("Getting Pokemon data...");
 
-            if (response?.Results is not null)
-            {
-                foreach (var pokemon in response.Results)
-                {  
-                    string capitalizedName = char.ToUpper(pokemon.Name[0]) + pokemon.Name[1..];
-                    
-                    PrintPokemonCard(capitalizedName, pokemon.Url);
+            try
+            {       // API end point of  pokemon 
+                string url = "https://pokeapi.co/api/v2/pokemon?limit=5";
+
+                MyPokemonResponse? result = await client.GetFromJsonAsync<MyPokemonResponse?>(url);
+
+                if (result?.Results != null)
+                {
+                    foreach (MyPokemonRecord p in result.Results)
+                    {
+                        MyPokemonDetails? details = await client.GetFromJsonAsync<MyPokemonDetails?>(p.Url ?? string.Empty);
+
+                        //
+                        string finalName = string.IsNullOrEmpty(p.Name) 
+                            ? "Unknown" 
+                            : char.ToUpper(p.Name[0]) + p.Name.Substring(1);
+
+                            //converted string to enum and if failes go back to unknown 
+                        string typeString = details?.Types?.FirstOrDefault()?.Type?.Name ?? "Unknown";
+                        if (!Enum.TryParse(typeString, true, out PokemonType typeEnum))
+                        {
+                            typeEnum = PokemonType.Unknown;
+                        }
+
+                        DateTime rightNow = DateTime.Now;
+
+                        //Console output for the Pokemon details
+                        Console.WriteLine("========================================");
+                        Console.WriteLine("Pokemon:    " + finalName);
+                        Console.WriteLine("Type:       " + typeEnum.ToString());
+                        Console.WriteLine("Fetched On: " + rightNow.ToString("g"));
+                        
+                        if (details?.Sprites != null)
+                        {
+                            Console.WriteLine("Picture:    " + details.Sprites.FrontDefault);
+                        }
+                        
+                        Console.WriteLine("========================================");
+                        Console.WriteLine();
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("No data received from the endpoint.");
+                Console.WriteLine("Error: " + ex.Message);
             }
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"Network error fetching data: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-        }
 
-        Console.WriteLine("\nPress any key to exit.");
-        Console.ReadKey();
+            Console.ReadLine();
+        }
     }
 
-    
-    private static void PrintPokemonCard(string name, string url)
+    public enum PokemonType
     {
-        const int cardWidth = 65;
-        const int contentWidth = cardWidth - 2; 
+        Normal, Fire, Water, Grass, Electric, Ice, Fighting, Poison,
+        Ground, Flying, Psychic, Bug, Rock, Ghost, Dragon, Dark,
+        Steel, Fairy, Unknown
+    }
 
-        string nameRow = $"│ Name: {name}".PadRight(contentWidth) + "│";
-        string urlRow  = $"│ URL:  {url}".PadRight(contentWidth) + "│";
+    public class MyPokemonResponse
+    {
+        [JsonPropertyName("results")]
+        public List<MyPokemonRecord>? Results { get; set; }
+    }
 
+    public class MyPokemonRecord
+    {
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
+    }
+
+    public class MyPokemonDetails
+    {
+        [JsonPropertyName("types")]
+        public List<MyTypeSlot>? Types { get; set; }
         
-        string topBorder = "┌" + new string('─', contentWidth - 1) + "┐";
-        string botBorder = "└" + new string('─', contentWidth - 1) + "┘";
+      
+        [JsonPropertyName("sprites")]
+        public MyPokemonSprites? Sprites { get; set; }
+    }
 
-        // Output the card block to the console
-        Console.WriteLine(topBorder);
-        Console.WriteLine(nameRow);
-        Console.WriteLine(urlRow);
-        Console.WriteLine(botBorder);
-        Console.WriteLine(); // Small spacer between cards
+    public class MyTypeSlot
+    {
+        [JsonPropertyName("type")]
+        public MyTypeInfo? Type { get; set; }
+    }
+
+    public class MyTypeInfo
+    {
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+    }
+
+    public class MyPokemonSprites
+    {
+        [JsonPropertyName("front_default")]
+        public string? FrontDefault { get; set; }
     }
 }
 
-public enum PokemonType
-{
-    Normal, Fire, Water, Grass, Electric, Ice, Fighting, Poison,
-    Ground, Flying, Psychic, Bug, Rock, Ghost, Dragon, Dark,
-    Steel, Fairy
-}
-
-public enum PokemonGerartion
-{
-    Gen1, Gen2, Gen3, Gen4, Gen5, Gen6, Gen7, Gen8, Gen9
-}
-
-public record PokemonCard(string Name, PokemonType Type, PokemonGerartion Generation);
-public record PokemonCardDetails(string Name, PokemonType Type, PokemonGerartion Generation, string Description);
+// please consider my code may look like a alcholic wrote this but i wanna get this demo done for next weeks class. hopefully  its good enough,
+// when exucting code with dotnet run, it fetches the pokemon api with deatails such as "name" "type" "fetched on" and url pics of pokemon 
 
 
-public record PokemonResponse(List<PokemonRecord> Results);
-public record PokemonRecord(string Name, string Url);
+
