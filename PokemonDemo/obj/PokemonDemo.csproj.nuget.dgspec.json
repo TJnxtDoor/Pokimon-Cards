@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonCards\\PokemonCards.csproj": {}
+    "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonDemo\\PokemonDemo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonCards\\PokemonCards.csproj": {
+    "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonDemo\\PokemonDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonCards\\PokemonCards.csproj",
-        "projectName": "PokemonCards",
-        "projectPath": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonCards\\PokemonCards.csproj",
+        "projectUniqueName": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonDemo\\PokemonDemo.csproj",
+        "projectName": "PokemonDemo",
+        "projectPath": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonDemo\\PokemonDemo.csproj",
         "packagesPath": "C:\\Users\\Tj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonCards\\obj\\",
+        "outputPath": "C:\\Users\\Tj\\Documents\\GitHub\\Pokimon-Cards\\PokemonDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tj\\AppData\\Roaming\\NuGet\\NuGet.Config",

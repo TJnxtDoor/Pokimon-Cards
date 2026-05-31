@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -15,14 +15,14 @@ class Program
         Console.WriteLine("Fetching Pokémon data asynchronously...\n");
 
         try
-        { // Define the API endpoint URL
+        {  // Fetch the list of Pokémon from the API
             const string apiUrl = "https://pokeapi.co/api/v2/pokemon";
             var response = await Client.GetFromJsonAsync<PokemonResponse>(apiUrl);
 
             if (response?.Results is not null)
             {
                 foreach (var pokemon in response.Results)
-                {   // Capitalize the first letter of the Pokémon name for better display
+                {  
                     string capitalizedName = char.ToUpper(pokemon.Name[0]) + pokemon.Name[1..];
                     
                     PrintPokemonCard(capitalizedName, pokemon.Url);
@@ -46,7 +46,7 @@ class Program
         Console.ReadKey();
     }
 
-    // Helper method to print a Pokémon's name and URL in a formatted card style
+    
     private static void PrintPokemonCard(string name, string url)
     {
         const int cardWidth = 65;
@@ -55,7 +55,7 @@ class Program
         string nameRow = $"│ Name: {name}".PadRight(contentWidth) + "│";
         string urlRow  = $"│ URL:  {url}".PadRight(contentWidth) + "│";
 
-        // Build top, middle separator, and bottom border lines
+        
         string topBorder = "┌" + new string('─', contentWidth - 1) + "┐";
         string botBorder = "└" + new string('─', contentWidth - 1) + "┘";
 
@@ -67,6 +67,22 @@ class Program
         Console.WriteLine(); // Small spacer between cards
     }
 }
+
+public enum PokemonType
+{
+    Normal, Fire, Water, Grass, Electric, Ice, Fighting, Poison,
+    Ground, Flying, Psychic, Bug, Rock, Ghost, Dragon, Dark,
+    Steel, Fairy
+}
+
+public enum PokemonGerartion
+{
+    Gen1, Gen2, Gen3, Gen4, Gen5, Gen6, Gen7, Gen8, Gen9
+}
+
+public record PokemonCard(string Name, PokemonType Type, PokemonGerartion Generation);
+public record PokemonCardDetails(string Name, PokemonType Type, PokemonGerartion Generation, string Description);
+
 
 public record PokemonResponse(List<PokemonRecord> Results);
 public record PokemonRecord(string Name, string Url);

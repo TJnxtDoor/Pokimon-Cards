@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "PokemonCards/1.0.0": {
+      "PokemonDemo/1.0.0": {
         "runtime": {
-          "PokemonCards.dll": {}
+          "PokemonDemo.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "PokemonCards/1.0.0": {
+    "PokemonDemo/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

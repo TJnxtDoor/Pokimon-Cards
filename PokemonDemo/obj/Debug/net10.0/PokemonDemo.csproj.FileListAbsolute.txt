@@ -1,0 +1,15 @@
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\bin\Debug\net10.0\PokemonDemo.exe
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\bin\Debug\net10.0\PokemonDemo.deps.json
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\bin\Debug\net10.0\PokemonDemo.runtimeconfig.json
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\bin\Debug\net10.0\PokemonDemo.dll
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\bin\Debug\net10.0\PokemonDemo.pdb
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.AssemblyInfoInputs.cache
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.AssemblyInfo.cs
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.csproj.CoreCompileInputs.cache
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.sourcelink.json
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.dll
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\refint\PokemonDemo.dll
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.pdb
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\PokemonDemo.genruntimeconfig.cache
+C:\Users\Tj\Documents\GitHub\Pokimon-Cards\PokemonDemo\obj\Debug\net10.0\ref\PokemonDemo.dll
